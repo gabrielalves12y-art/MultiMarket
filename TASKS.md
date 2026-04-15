@@ -1,13 +1,28 @@
 # MultiMarket — Projeto UC07
 
+---
+
+### 👥 Distribuição inteligente (baseado no projeto)
+
+* André → Esqueleto + Desing
+* Emerson → Vitrine + Paginação
+* André → Filtros + Busca
+* Pedro → Detalhe + Relacionados
+* Amsterdam → CRUD + Auth
+* Líder → Testes + revisão + organização
+
+# ⚙️ Como usar isso na prática (importante)
+
+### 🔁 Fluxo correto
+
+1. Pegou tarefa → move pra **DOING**
+2. Terminou → move pra **DONE**
+3. Não pode ter:
+
+   * muita coisa em DOING (máx. 2 por pessoa)
+
+
 ## 🟥 TO DO (A Fazer)
-
-### 🧱 Setup Inicial
-
-* [ ] Estrutura base do projeto (HTML/CSS/JS)
-* [ ] Configurar repositório Git
-* [ ] Definir padrão de commits
-* [ ] Criar layout base (header, main, footer)
 
 ---
 
@@ -22,6 +37,7 @@
 
 ### 📂 Categorias
 
+* [ ] Tela categorias
 * [ ] GET /categories
 * [ ] Renderizar menu de categorias
 * [ ] Filtro por categoria (sem reload)
@@ -119,49 +135,20 @@
 
 *(Mover tarefas finalizadas pra cá)*
 
-* [ ] ...
+### 🧱 Setup Inicial
 
----
+* [X] Estrutura base do projeto (HTML/CSS/JS)
+* [X] Configurar repositório Git
+* [X] Definir padrão de commits
+* [X] Criar layout base (header, main, footer)
 
-# ⚙️ Como usar isso na prática (importante)
-
-### 🔁 Fluxo correto
-
-1. Pegou tarefa → move pra **DOING**
-2. Terminou → move pra **DONE**
-3. Não pode ter:
-
-   * muita coisa em DOING (máx. 2 por pessoa)
-
----
-
-### 👥 Distribuição inteligente (baseado no projeto)
-
-Divide assim:
-
-* Dev 1 → Vitrine + Paginação
-* Dev 2 → Filtros + Busca
-* Dev 3 → Detalhe + Relacionados
-* Dev 4 → CRUD + Auth
-* Líder → Testes + revisão + organização
-
----
-
-### 💡 Dica de ouro (isso ganha projeto)
-
-Cria subtarefas com responsáveis:
-
-```
-[ ] GET /products — @João
-[ ] Filtro por categoria — @Maria
-```
 
 ---
 
 ### 🚨 Erro comum que faz perder ponto
 
 * Fazer tudo junto sem organizar
-* Não mover tarefas no Kanban
+* Não mover tarefas no TASKS.md
 * Não saber explicar quem fez o quê
 
 ---
