@@ -1,15 +1,38 @@
 # MultiMarket — Projeto UC07
 
----
-
 ### 👥 Distribuição inteligente (baseado no projeto)
 
-* André → Esqueleto + Desing
-* Emerson → Vitrine + Paginação
-* André → Filtros + Busca
-* Pedro → Detalhe + Relacionados
-* Amsterdam → CRUD + Auth
-* Líder → Testes + revisão + organização
+---
+
+👤 André (UI + base visual)
+Filtros + Busca (já definido)
+Loading + Empty State
+Responsividade
+👉 3 tarefas (leve/médio → ok)
+
+---
+
+👤 Amsterdam (backend heavy)
+CRUD Produtos
+Auth
+Categorias (API + integração)
+👉 3 tarefas (pesado → ok, mas coerente)
+
+---
+
+👤 Emerson (fluxo de listagem)
+Vitrine
+Paginação
+👉 2 tarefas (médio/pesado → equilibrado)
+
+---
+
+👤 Pedro (detalhamento)
+Detalhe do Produto
+Produtos Relacionados
+👉 2 tarefas (médio → ok)
+
+---
 
 # ⚙️ Como usar isso na prática (importante)
 
