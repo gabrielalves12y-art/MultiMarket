@@ -1,5 +1,23 @@
 # 🧠 Regras de Desenvolvimento — Projeto UC07
 
+## 📌 Descrição
+
+Aplicação web de e-commerce integrada à Platzi Fake Store API, desenvolvida como simulação de entrega profissional.
+
+---
+
+## 🚀 Tecnologias
+
+* [ ] HTML5 semântico
+* [ ] CSS3 (Flexbox + Grid + Responsivo)
+* [ ] JavaScript puro (sem frameworks)
+* [ ] Fetch API
+* [ ] localStorage (JWT)
+* [ ] Git + GitHub
+* [ ] Deploy (GitHub Pages ou Vercel)
+
+---
+
 ## 🌳 Estratégia de Branch
 
 * ❌ **Nunca trabalhar diretamente na `main`**
@@ -140,12 +158,11 @@ style: ajustar layout responsivo da vitrine
 
 ---
 
-### 🧠 Líder Técnico (você)
+### 🧠 Líder Técnico
 
 * Revisar PRs
 * Garantir padrão de código
 * Validar funcionamento
-* Organizar tarefas (Kanban)
 * Garantir que ninguém quebre a main
 
 ---
@@ -218,6 +235,50 @@ feature/nome-da-feature
 │           ├── nome-decritivo.png
 │       └── icons/
 │           ├── nome-decritivo.svg
+```
+
+---
+
+## 🔗 Endpoints (OBRIGATÓRIOS)
+
+### 📦 Produtos
+
+* [ ] GET /products (listar produtos)
+* [ ] GET /products?offset=N&limit=12 (paginação)
+* [ ] GET /products?categoryId=:id (filtro por categoria)
+* [ ] GET /products?title=:q (busca)
+* [ ] GET /products?price_min=X&price_max=Y (filtro por preço)
+* [ ] GET /products/:id (detalhe do produto)
+* [ ] GET /products/:id/related (produtos relacionados)
+* [ ] POST /products (criar produto)
+* [ ] PUT /products/:id (editar produto)
+* [ ] DELETE /products/:id (deletar produto)
+
+### 📂 Categorias
+
+* [ ] GET /categories (listar categorias)
+
+### 👤 Usuários
+
+* [ ] POST /users (criar usuário)
+* [ ] POST /users/is-available (verificar e-mail)
+
+### 🔐 Autenticação
+
+* [ ] POST /auth/login
+* [ ] GET /auth/profile
+
+---
+
+## 🔑 Observações Técnicas
+
+* Token JWT deve ser salvo no localStorage
+* Requests autenticados devem usar:
+
+```js
+headers: {
+  Authorization: 'Bearer ' + localStorage.getItem('token')
+}
 ```
 
 ---
