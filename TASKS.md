@@ -165,6 +165,15 @@ Produtos Relacionados
 * [X] Definir padrão de commits
 * [X] Criar layout base (header, main, footer)
 
+### 🔐 Autenticação
+
+* [x] Login
+* [x] Salvar token (localStorage)
+* [x] GET /auth/profile
+
+### 👤 Usuários
+
+* [x] Cadastro de usuário
 
 ---
 

@@ -3,15 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MultMarket</title>
-    <link rel="stylesheet" href="src/css/main.css" />
-    <style>
-      :root {
-        --roxo-principal: #4a14bc;
-        --roxo-medio: #6a1b9a;
+    <title>Cadastro</title>
+  <style>
+    :root {
+      --roxo-principal: #4a14bc;
+      --roxo-medio: #6a1b9a;
       --bg-page: #f4f7f6;
       --header-footer: #0f172a; /* Azul quase preto, muito elegante */
-      --accent: #00BFA5; /* Verde que "salta" aos olhos */
+      --accent: #10b981; /* Verde que "salta" aos olhos */
       --accent-hover: #34d399;
       --text-dark: #1e293b;
       --text-light: #ffffff;
@@ -22,10 +21,10 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      height: 100vh;
+      height: 80vh;
       font-family: Arial, sans-serif;
       background-color: var(--roxo-medio);
-      margin: 0;
+      margin: 0px auto;
       padding: 0;
       color: var(--text-light);
     }
@@ -34,10 +33,9 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      
-      
-    }
     
+    }
+
     form {
       display: flex;
       flex-direction: column;
@@ -46,59 +44,63 @@
       margin-top: 20px;
       gap: 10px;
     }
-    
-    
+
+    label {
+        font-family: "Times New Roman", Times, serif;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
     input {
       padding: 10px 10px;
       border-radius: 10px;
-      margin: 10px 0;
+      margin: 0px auto;
       width: 100%;
+
     }
 
     button {
       padding: 10px 15px;
       border-radius: 10px;
     }
-    
+
     button:hover {
       background-color: var(--accent-hover);
       color: white;
       cursor: pointer;
     }
-    
+
     div p {
       font-family: "Times New Roman", Times, serif;
       font-size: 18px;
       font-weight: bold;
       text-align: center;
     }
-    
+
     div a {
       font-weight: 200;
       color: rgba(0, 240, 228, 0.847);
       text-decoration: none;
     }
-    
+
     div a:hover {
       color: var(--accent-hover);
       text-decoration: underline;
     }
 
-    footer{
+     footer{
       position: absolute;
       bottom: 30px;
       width: 100%;
       text-align: center;
     }
   </style>
-  
-</head>
+  </head>
   <body>
     <main>
       <header>
-        <h1>MultiMarket</h1>
+        <h1>Cadastra-se aqui</h1>
       </header>
-
       <nav>
         <a href="../index.html">Início</a>
         <a href="#produtos">Produtos</a>
@@ -106,46 +108,43 @@
         <a href="#sobre">Sobre</a>
       </nav>
 
-      <div>
-        <!--Login -->
+      <section>
 
-        <form id="login-form">
+        <!-- Formulário de cadastro do usuário -->
+        <form id="register-form">
+          <label for="name">Primeiro nome</label>
           <input
-            type="email"
-            id="log-email"
-            placeholder="Informe seu email"
+            type="text"
+            id="reg-name"
+            placeholder="Primeiro nome"
             required
           />
 
+          <!-- 
+          <label for="surname">Sobrenome</label>
           <input
-            type="password"
-            id="log-password"
-            placeholder="Senha"
+            type="text"
+            id="reg-surname"
+            placeholder="Sobrenome"
             required
-          />
+          /> -->
 
-          <button type="submit">Entrar</button>
+          <label for="email">Email</label>
+          <input type="email" id="reg-email" placeholder="Informe seu email" required />
+
+          <label for="password">Senha</label>
+          <input type="password" id="reg-password" placeholder="Informe sua senha" required />
+
+          <button type="submit">Cadastrar</button>
+
+          <div>
+            <p>Já tem conta? <a href="../index.html">Entrar</a></p>
+          </div>
         </form>
-
-        <div>
-          <p>Não tem conta? <a href="pages/register.html">Registrar-se</a></p>
-        </div>
-
-        <div>
-          <p>Ou</p>
-        </div>
-
-        <div>
-          <p>
-            Esqueceu a senha?
-            <a href="pages/update-user.html">Recuperar senha</a>
-          </p>
-        </div>
-      </div>
+      </section>
     </main>
 
-    <script src="src/javascript/app.js"></script>
-
+    <script src="../src/javascript/app.js"></script>
 
     <footer>
       <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
