@@ -1,5 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Candal&display=swap');
 
+:root {
+    --search-height: 35px;
+}
+
 * {
     font-family: "Candal", sans-serif;
     font-weight: 400;
@@ -16,6 +20,10 @@ body {
     background-color: #4a148c;
 }
 
+.display-container {
+    background-color: #fff;
+}
+
 .logo-icon {
     display: flex;
     align-items: center;
@@ -23,10 +31,10 @@ body {
 }
 
 .logo-icon img {
-    height: 48px;
+    height: 64px;
 }
 
-.container-form button {
+.form-container button {
     border: none;
     background-color: transparent;
     height: 25px;
@@ -43,4 +51,41 @@ body {
     position: fixed;
     top: 60px;
     right: 20px;
+}
+
+.search-container {
+    margin: 0;
+    position: fixed; 
+    top: 20%; 
+    left: 50%; 
+    margin-right: -50%; 
+    transform: translate(-50%, -50%);
+    height: var(--search-height);
+    background: #fff;
+    border-radius: calc(var(--search-height) / 2);
+    padding: 0 8px 0 14px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    width: min(210px, 90vw);
+    transition: 0.3s;
+}
+
+.search-container input[type="text"] {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 14px;
+    background: transparent;
+    height: 100%;
+}
+
+.search-container button {
+    background: #4a148c;
+    border: none;
+    color: white;
+    width: calc(var(--search-height) - 10px);
+    height: calc(var(--search-height) - 10px);
+    border-radius: 50%;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background 0.3s;
 }
