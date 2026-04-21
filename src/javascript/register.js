@@ -1,4 +1,5 @@
 const URL_BASE = 'https://api.escuelajs.co/api/v1';
+const STORAGE_REGISTERED_USERS_KEY = 'registered_users';
 
 
 // -*-*-*- FUNÇÃO DE EXIBIÇÃO DE MENSAGEM *-*-*-*-
@@ -13,64 +14,253 @@ function exibirMensagem(texto, tipo = 'erro') {
 
 		setTimeout(() => {
 			msgElement.style.display = 'none';
-		}, 5000); // Rever o tempo de exibição da mensagem depois
+		}, 3000); // Rever o tempo de exibição da mensagem depois
+	}
+}
+
+function normalizarEmail(email) {
+	return email.trim().toLowerCase();
+}
+
+function ehEmailValido(email) {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
+function transformarEmLista(valor) {
+	if (!valor) {
+		return [];
+	}
+
+	if (Array.isArray(valor)) {
+		return valor.filter(Boolean);
+	}
+
+	return [valor].filter(Boolean);
+}
+
+function lerStorageJSON(chave) {
+	try {
+		return JSON.parse(localStorage.getItem(chave));
+	} catch (error) {
+		console.error(`Erro ao ler ${chave} do localStorage:`, error);
+		return null;
+	}
+}
+
+function obterUsuariosRegistrados() {
+	const usuariosRegistrados = transformarEmLista(lerStorageJSON(STORAGE_REGISTERED_USERS_KEY));
+
+	if (usuariosRegistrados.length > 0) {
+		return usuariosRegistrados;
+	}
+
+	const usuariosLegados = transformarEmLista(lerStorageJSON('users'));
+
+	if (usuariosLegados.length > 0) {
+		localStorage.setItem(STORAGE_REGISTERED_USERS_KEY, JSON.stringify(usuariosLegados));
+		return usuariosLegados;
+	}
+
+	return [];
+}
+
+function salvarUsuarioRegistrado(usuario) {
+	const emailNormalizado = normalizarEmail(usuario?.email || '');
+
+	if (!emailNormalizado) {
+		return;
+	}
+
+	const usuariosRegistrados = obterUsuariosRegistrados().filter((item) => {
+		return normalizarEmail(item?.email || '') !== emailNormalizado;
+	});
+
+	usuariosRegistrados.push({
+		...usuario,
+		email: emailNormalizado
+	});
+
+	localStorage.setItem(STORAGE_REGISTERED_USERS_KEY, JSON.stringify(usuariosRegistrados));
+}
+
+function emailExisteEmUsuarios(usuarios, email) {
+	const emailNormalizado = normalizarEmail(email);
+
+	return transformarEmLista(usuarios).some((usuario) => {
+		return normalizarEmail(usuario?.email || '') === emailNormalizado;
+	});
+}
+
+async function buscarUsuariosNaApi() {
+	try {
+		const response = await fetch(`${URL_BASE}/users?offset=0&limit=1000`);
+
+		if (!response.ok) {
+			return {
+				ok: false,
+				users: []
+			};
+		}
+
+		const data = await response.json();
+
+		return {
+			ok: true,
+			users: transformarEmLista(data)
+		};
+	} catch (error) {
+		console.error('Erro ao buscar usuários da API:', error);
+
+		return {
+			ok: false,
+			users: []
+		};
 	}
 }
 
 
 // -*-*-*- VERIFICAÇÃO DE DISPONIBILIDADE DE E-MAIL *-*-*-*-
-
 async function verificarDisponibilidadeEmail(email) {
-	const response = await fetch(`${URL_BASE}/users/is-available`, {
-		method: 'POST',
-		headers: { 'Content-Type': 'application/json' },
-		body: JSON.stringify({ email })
-	});
+	const emailNormalizado = normalizarEmail(email);
+	const usuariosRegistrados = obterUsuariosRegistrados();
 
-	const data = await response.json();
+	if (emailExisteEmUsuarios(usuariosRegistrados, emailNormalizado)) {
+		return {
+			ok: true,
+			isAvailable: false
+		};
+	}
+
+	const { ok, users } = await buscarUsuariosNaApi();
+
+	if (!ok) {
+		return {
+			ok: false,
+			isAvailable: false
+		};
+	}
 
 	return {
-		ok: response.ok,
-		isAvailable: data?.isAvailable === true
+		ok: true,
+		isAvailable: !emailExisteEmUsuarios(users, emailNormalizado)
 	};
+}
+
+
+function limparEstadoCampoEmail() {
+	if (!emailInput) {
+		return;
+	}
+
+	emailInput.setCustomValidity('');
+	emailInput.style.borderColor = '';
+}
+
+
+
+function atualizarEstadoCampoEmail({
+	mensagem = '',
+	tipo = 'erro',
+	borderColor = '',
+	customValidity = '',
+	reportValidity = false
+}) {
+	if (!emailInput) {
+		return;
+	}
+
+	emailInput.style.borderColor = borderColor;
+	emailInput.setCustomValidity(customValidity);
+
+	if (mensagem) {
+		exibirMensagem(mensagem, tipo);
+	}
+
+	if (reportValidity) {
+		emailInput.reportValidity();
+	}
+}
+
+// -*-*-*- FUNÇÃO DE VALIDAÇÃO DE E-MAIL NO CAMPO DE REGISTRO *-*-*-*-
+async function validarEmailNoCampo() {
+	if (!emailInput) {
+		return true;
+	}
+
+	const email = normalizarEmail(emailInput.value);
+
+	if (!email) {
+		return true;
+	}
+
+	limparEstadoCampoEmail();
+
+	// Validção de formato de e-mail
+	if (!ehEmailValido(email)) {
+		atualizarEstadoCampoEmail({
+			mensagem: 'Informe um e-mail válido.',
+			tipo: 'erro',
+			borderColor: '#ff4d4d',
+			customValidity: 'Informe um e-mail válido.',
+			reportValidity: true
+		});
+		return false;
+	}
+
+	emailInput.value = email;
+
+	try {
+		const { ok, isAvailable } = await verificarDisponibilidadeEmail(email);
+
+		if (!ok) {
+			atualizarEstadoCampoEmail({
+				mensagem: 'Não foi possível verificar a disponibilidade do e-mail agora. Tente novamente.',
+				tipo: 'erro'
+			});
+			return false;
+		}
+
+		if (!isAvailable) {
+			atualizarEstadoCampoEmail({
+				mensagem: 'Este e-mail já está cadastrado. Use outro e-mail.',
+				tipo: 'erro',
+				borderColor: '#ff4d4d',
+				customValidity: 'Este e-mail já está cadastrado.',
+				reportValidity: true
+			});
+			return false;
+		}
+
+		atualizarEstadoCampoEmail({
+			mensagem: 'E-mail disponível!',
+			tipo: 'sucesso',
+			borderColor: '#2ecc71'
+		});
+		return true;
+
+	} catch (error) {
+        console.error('Erro na verificação:', error);
+        atualizarEstadoCampoEmail({
+			mensagem: 'Erro de conexão ao verificar a disponibilidade do e-mail.',
+			tipo: 'erro'
+		});
+        return false;
+    }
 }
 
 
 
 const emailInput = document.getElementById('reg-email');
 if (emailInput){
+	
 	emailInput.addEventListener('blur', async () => {
-		const email = emailInput.value.trim();
-        
+		await validarEmailNoCampo();
+	});
 
-
-		if (!email || !email.includes('@')) return; 
-
-		try {
-			const { ok, isAvailable } = await verificarDisponibilidadeEmail(email);
-
-			if (!ok) {
-				exibirMensagem('Não foi possível verificar a disponibilidade do e-mail.', 'erro'); // rever depois se deixa essa mensagem ou a função nativa do HTML 
-				emailInput.style.borderColor = '#f39c12';
-				emailInput.setCustomValidity('Não foi possível verificar este e-mail agora.'); 
-				return;
-			}
-
-			if (!isAvailable) {
-				exibirMensagem('Este e-mail já está cadastrado. Use outro e-mail.', 'erro'); // Mesma coisa, analisar direitinho qual o melhor em termos de UX, acessibilidade ou se deixa os dois
-				emailInput.style.borderColor = '#ff4d4d';
-				emailInput.setCustomValidity('Este e-mail já está cadastrado.'); 
-				emailInput.reportValidity(); 
-			} else {
-				exibirMensagem('E-mail disponível!', 'sucesso');
-				emailInput.style.borderColor = '#2ecc71';
-				emailInput.setCustomValidity('');
-			}
-		} catch (error) {
-		exibirMensagem('Erro ao verificar e-mail. Tente novamente.', 'erro');
-		emailInput.setCustomValidity('Não foi possível verificar este e-mail agora.');
-		console.error('Erro na verificação de e-mail:', error); // lembrar de apagar depois
-	} });
+	
+	emailInput.addEventListener('input', () => {
+		limparEstadoCampoEmail();
+	});
 }
 
 
@@ -78,13 +268,18 @@ const registerForm = document.getElementById('register-form');
 if(registerForm){
     
 	// -*-*-*- FUNÇÃO DE CADASTRO *-*-*-*-
-	document.getElementById('register-form').addEventListener('submit', async (event) => {
+	registerForm.addEventListener('submit', async (event) => {
 	  event.preventDefault();
+
+	  const emailValido = await validarEmailNoCampo();
+	  if (!emailValido) {
+		return;
+	  }
 
 	  // Dados do usuário a ser cadastrado
 	  const userData = {
 		name: document.getElementById('reg-name').value,
-		email: document.getElementById('reg-email').value,
+		email: normalizarEmail(document.getElementById('reg-email').value),
 		password: document.getElementById('reg-password').value,
 		avatar: "https://picsum.photos/80"
 	  };
@@ -104,24 +299,23 @@ if(registerForm){
     
 		if(response.ok){
 			localStorage.setItem('userId', data.id)
-			localStorage.setItem('users', JSON.stringify(data))
+			salvarUsuarioRegistrado(data);
 			exibirMensagem('Usuário criado com sucesso! Agora faça o login', 'sucesso');
-			console.log('Usuário', data); // lembrar de apagar depois
 
 			// Time para o usuário ler a mensagem antes de redirecionar para a página de login
 			setTimeout(() => {
-				window.location.href = '../index.html';
+				window.location.href = '../pages/login.html';
 			}, 3000);    
 		}
 
 		else{
 			exibirMensagem('Erro no cadastro: ' + data.message, 'erro');
-			console.error('Erro no cadastro:', data); // lembrar de apagar depois
+			console.error('Erro no cadastro:', data);
 		}
     
 	} catch (error) {
 			exibirMensagem('Erro na requisição. Verifique a sua conexão.', 'erro');
-			console.error('Erro na requisição:', error); // lembrar de apagar depois
+			console.error('Erro na requisição:', error);
 		}
     
 	});
