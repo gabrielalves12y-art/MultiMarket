@@ -1,248 +1,23 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MultiMarket</title>
-    <link rel="stylesheet" href="src/css/main.css" />
- <style>
-
-    :root {
-      --roxo-principal: #4a14bc;
-      --roxo-medio: #6a1b9a;
-      --bg-page: #f4f7f6;
-      --header-footer: #0f172a; /* Azul quase preto, muito elegante */
-      --accent: #10b981; /* Verde que "salta" aos olhos */
-      --accent-hover: #34d399;
-      --text-dark: #1e293b;
-      --text-light: #ffffff;
-      --link: #2563eb;
-    }
-
-    body {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background-color: var(--roxo-medio);
-      margin: 0;
-      padding: 16px;
-      color: var(--text-light);
-      box-sizing: border-box;
-    }
-
-    main {
-      width: 100%;
-      max-width: 420px;
-      padding: 24px 20px 20px;
-      box-sizing: border-box;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: rgba(15, 23, 42, 0.24);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 24px;
-      box-shadow: 0 20px 50px rgba(15, 23, 42, 0.25);
-      backdrop-filter: blur(8px);
-    }
-
-    header {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    h1 {
-      margin: 0;
-      font-size: clamp(1.6rem, 6vw, 2.2rem);
-      line-height: 1.1;
-    }
-
-    /*
-    nav {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 16px;
-      margin-bottom: 8px;
-    }
-
-    nav a {
-      color: var(--text-light);
-      text-decoration: none;
-      font-size: 0.95rem;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    nav a:hover {
-      background: rgba(255, 255, 255, 0.16);
-    }*/
-
-    section {
-      width: 100%;
-    }
-
-    form {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: stretch;
-      margin-top: 20px;
-      gap: 12px;
-      width: 100%;
-    }
-
-    label {
-        font-family: "Times New Roman", Times, serif;
-        font-size: 1rem;
-        font-weight: bold;
-        letter-spacing: 0.2px;
-    }
-
-    input {
-      padding: 14px 14px;
-      border-radius: 12px;
-      margin: 0;
-      width: 100%;
-      box-sizing: border-box;
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      background: rgba(255, 255, 255, 0.96);
-      color: var(--text-dark);
-      font-size: 1rem;
-      outline: none;
-
-    }
-
-    input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
-    }
-
-    button {
-      padding: 14px 16px;
-      border-radius: 12px;
-      border: none;
-      width: 100%;
-      font-weight: 700;
-      font-size: 1rem;
-      background: var(--accent);
-      color: var(--text-dark)
-    }
-
-    button:hover {
-      background-color: var(--accent-hover);
-      color: var(--text-dark);
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: translateY(1px);
-    }
-
-    #error-message {
-        display:none; 
-        margin-top:12px; 
-        padding:12px;
-        border-radius:10px; 
-        text-align:center; 
-        background:var(--header-footer); 
-        color:var(--text-light);
-      }
-      
-
-    form div {
-      width: 100%;
-    }
-
-    div p {
-      font-family: "Times New Roman", Times, serif;
-      font-size: 1.2rem;
-      font-weight: bold;
-      text-align: center;
-      margin-bottom: 0;
-      line-height: 1.5;
-    }
-
-    div a {
-      font-weight: 200;
-      color: rgba(0, 240, 228, 0.847);
-      text-decoration: none;
-      word-break: break-word;
-    }
-
-    div a:hover {
-      color: var(--accent-hover);
-      text-decoration: underline;
-    }
-
-     footer{
-      position: static;
-      margin-top: auto;
-      width: 100%;
-      text-align: center;
-      font-size: 0.9rem;
-      opacity: 0.92;
-      padding-top: 16px;
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 12px;
-        justify-content: flex-start;
-      }
-
-      main {
-        min-height: calc(100vh - 24px);
-        padding: 20px 16px 16px;
-        border-radius: 20px;
-      }
-
-      /*nav {
-        gap: 8px;
-      }
-
-      nav a {
-        width: calc(50% - 4px);
-        text-align: center;
-        box-sizing: border-box;
-      }*/
-
-      form {
-        gap: 10px;
-      }
-
-      input,
-      button {
-        min-height: 48px;
-      }
-
-      #error-message {
-        font-size: 0.95rem;
-      }
-    }
-  </style>
+    <link rel="stylesheet" href="../src/css/login.css" />
+ 
   </head>
   <body>
-    <main>
-      <header>
-        <h1>MultiMarket</h1>
+    <main class="auth-shell auth-shell--login">
+      <header class="auth-header">
+        <img src="../src/assets/imgs/Logo.png" alt="Logo MultiMarket" class="auth-logo" />
       </header>
 
-      <!-- <nav>
-        <a href="../index.html">Início</a>
-        <a href="#produtos">Produtos</a>
-        <a href="#contato">Contato</a>
-        <a href="#sobre">Sobre</a>
-      </nav> -->
+      <section class="auth-card">
+        <div class="icon" aria-hidden="true">
+          <img src="../src/assets/icons/sharp-person.png" alt="" />
+        </div>
 
-      <div>
         <form id="login-form">
           <input
             type="email"
@@ -261,26 +36,27 @@
           <button type="submit">Entrar</button>
         </form>
 
-        <div>
-          <p>Não tem conta? <a href="pages/register.html">Registrar-se</a></p>
+        <div class="links">
+          <p>Não possui conta? <a href="register.html">Cadastrar-se</a></p>
         </div>
 
-        <div>
+        <div class="divider">
           <p>Ou</p>
         </div>
 
-        <div>
+        <div class="links">
           <p>
             Esqueceu a senha?
-            <a href="pages/update-user.html">Recuperar senha</a>
+            <a href="../pages/update-user.html">Recuperar senha</a>
           </p>
         </div>
-      </div>
+      </section>
 
       <div id="error-message"></div>
     </main>
 
     <script src="../src/javascript/login.js"></script>
+    <!-- <script src="../src/javascript/app.js"></script> -->
 
     <footer>
       <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
