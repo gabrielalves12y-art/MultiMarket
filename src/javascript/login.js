@@ -17,6 +17,14 @@ function exibirMensagem(texto, tipo = 'erro') {
 	}
 }
 
+function normalizarEmail(email) {
+	return email.trim().toLowerCase();
+}
+
+function ehEmailValido(email) {
+	return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
+}
+
 
 async function renovarTokens() {
 	const refreshToken = localStorage.getItem('refresh_token');
@@ -61,8 +69,15 @@ if (loginForm) {
     
 		event.preventDefault();
     
+		const email = normalizarEmail(document.getElementById('log-email').value);
+
+		if (!ehEmailValido(email)) {
+			exibirMensagem('Informe um e-mail válido.', 'erro');
+			return;
+		}
+
 		const loginData = {
-			email: document.getElementById('log-email').value,
+			email,
 			password: document.getElementById('log-password').value
 		};
     
@@ -87,9 +102,10 @@ if (loginForm) {
 				console.log('Token JWT:', data.access_token); // lembrar de apagar depois
 				console.log('Refresh Token:', data.refresh_token); // lembrar de apagar depois
 
+				// Redirecionar para a página de perfil ou dashboard
 				setTimeout(() => {
-					window.location.href = 'pages/profile.html';
-				}, 3000);
+					window.location.href = '../pages/profile.html';
+				}, 1500);
 
 			}
 			else{
