@@ -3,6 +3,10 @@
 :root {
     --search-height: 35px;
     --header-height: 160px;
+    --roxo: #4a148c;
+    --roxo-médio: #6a1b9a;
+    --roxo-claro: #f3e5f5;
+    --radius: 10px;
 }
 
 * {
@@ -17,13 +21,13 @@
 }
 
 body {
-    background-color: #fff;
+    background-color: #f7f7f7;
     font-size: 16px;
 }
 
 .header-catalog {
-    border: #4a148c solid 1px;
-    background-color: #4a148c;
+    border: var(--roxo) solid 1px;
+    background-color: var(--roxo);
     height: var(--header-height);
 }
 
@@ -32,10 +36,6 @@ body {
     background-color: transparent;
     height: 25px;
     cursor: pointer;
-}
-
-.display-container {
-    background-color: #fff;
 }
 
 .logo-icon {
@@ -50,18 +50,22 @@ body {
 }
 
 .profile-icon {
-    position: absolute;
+    position: fixed;
+    top: 60px;
     left: 20px;
+    z-index: 100;
 }
 
 .cart-icon {
-    position: absolute;
-    left: 89%;
+    position: fixed;
+    top: 60px;
+    right: 20px;
+    z-index: 100;
 }
 
 .search-container {
-    position: relative;
-    top: calc(var(--header-height) - var(--search-height) / 0.26);
+    position: fixed;
+    top: calc(var(--header-height) - var(--search-height) / 0.5);
     left: 50%;
     transform: translateX(-50%);
     display: flex;
@@ -71,8 +75,8 @@ body {
     border-radius: calc(var(--search-height) / 2);
     padding: 0 8px 0 14px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
-    width: min(210px, 90vw);
-    transition: 0.3s;
+    width: min(340px, 60vw);
+    z-index: 100;
 }
 
 .search-container input[type="text"] {
@@ -85,7 +89,7 @@ body {
 }
 
 .search-container button {
-    background: #4a148c;
+    background: var(--roxo);
     border: none;
     color: white;
     width: calc(var(--search-height) - 10px);
@@ -96,37 +100,199 @@ body {
     transition: background 0.3s;
 }
 
-.footer-actions {
+.search-container button:hover {
+    background: var(--roxo-médio);
+}
+
+.display-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f7f7f7;
+    padding: 32px 16px 80px;
+    margin-top: calc(var(--header-height) + var(--search-height) / 2 + 12px);
+}
+
+.loading-state,
+.empty-state {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 60px 0;
+    color: #888;
+    font-size: 1rem;
+}
+
+.loading-state i {
+    font-size: 2rem;
+    color: var(--roxo);
+}
+
+.filter-panel {
+    width: 60%;
+    position: relative;
+    margin: auto;
+    border-radius: 24px;
+    flex-shrink: 0;
+    background-color: var(--roxo);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: row;
+    gap: 16px;
+    height: 140px;
+    align-self: flex-start;
+    margin-top: 8px;
+}
+
+.filter-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--roxo-claro);
+}
+
+.filter-close {
     display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.1rem;
+    color: var(--roxo-claro);
+}
+
+.filter-label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--roxo-claro);
+    margin-bottom: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.filter-select,
+.filter-input {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    outline: none;
+    background: #fafafa;
+    color: var(--roxo-claro);
+    transition: border-color 0.2s;
+    
+}
+
+.filter-select:focus,
+.filter-input:focus {
+    border-color: var(--roxo);
+}
+
+.btn-apply-filter {
+    width: 15%;
+    height: 24px;
+    padding: 5px;
+    background: var(--roxo);
+    color: #fff;
+    border: solid white 1px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: background 0.2s;
+}
+
+.btn-apply-filter:hover {
+    background: var(--roxo-médio);
+}
+
+.btn-clear-filter {
+    width: 15%;
+    height: 24px;
+    padding: 5px;
+    background: transparent;
+    color: var(--roxo-claro);
+    border: 1.5px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s;
+}
+
+.btn-clear-filter:hover {
+    border-color: #f44336;
+    color: #f44336;
+}
+
+.filter-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.4);
+    z-index: 200;
+}
+
+.filter-overlay.active {
+    display: block;
+}
+
+@media (min-width: 769px) {
+    .display-container {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 24px;
+        padding-top: 40px;
+    }
+
+    .display-container > .filter-panel {
+        position: sticky;
+        top: 20px;
+    }
 }
 
 @media (max-width: 768px) {
-    .footer-actions {
+    .search-container {
+        width: min(210px, 90vw);
+    }
+
+    .filter-panel {
         position: fixed;
-        bottom: 0;
+        top: 0;
+        left: -280px;
+        width: 260px;
+        height: 100dvh;
+        border-radius: 0;
+        z-index: 300;
+        overflow-y: auto;
+        transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .filter-panel.open {
         left: 0;
-        width: 100%;
-        padding: 12px 16px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        border: #4a148c solid 1px;
-        background-color: #4a148c;
+    }
+
+    .filter-close {
+        display: block;
+    }
+
+    .display-container {
+        flex-direction: column;
+        margin-top: calc(var(--header-height) + var(--search-height) / 2 + 12px);
+        padding-bottom: 100px;
     }
 }
-
-    .btn {
-        flex: 1;
-        padding: 6px;
-        font-size: 1rem;
-        border: none;
-        cursor: pointer;
-    }
-
-    .btn-footer {
-        border: none;
-        border-radius: 12px;
-        padding: 0.7%;
-        width: 35%;
-    }
