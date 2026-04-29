@@ -6,8 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Catálogo</title>
     <link rel="stylesheet" href="../src/css/catalog.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 <body>
     <div class="header-catalog">
@@ -16,52 +16,80 @@
         </section>
         <section>
             <form class="form-container">
-                <a href="https://github.com/gabrielalves12y-art" id="" class="profile-icon"><img
-                        src="../src/assets/icon/profile-icon.svg" alt="Perfil do Usuário "></a>
-                <a href="https://www.pichau.com.br/cart" id="" class="cart-icon"><img
-                        src="../src/assets/icon/cart-icon.svg" alt="Carrinho de compras">></a>
+                <a href="https://github.com/gabrielalves12y-art" class="profile-icon">
+                    <img src="../src/assets/icon/profile-icon.svg" alt="Perfil do Usuário">
+                </a>
+                <a href="https://www.pichau.com.br/cart" class="cart-icon">
+                    <img src="../src/assets/icon/cart-icon.svg" alt="Carrinho de compras">
+                </a>
             </form>
-            <form class="search-container" action="#" method="get">
-                <input type="text" placeholder="Buscar" name="q" required>
+            <form class="search-container" id="search-form" action="#" method="get">
+                <input type="text" id="search-input" placeholder="Buscar" name="q" required>
                 <button type="submit"><i class="fas fa-search"></i></button>
             </form>
         </section>
     </div>
 
-    <aside class="filter-panel" id="filter-panel">
-        <div class="filter-header">
-            <span>Filtros</span>
-            <button class="filter-close" id="filter-close"><i class="fas fa-times"></i></button>
-        </div>
-
-        <div class="filter-group">
-            <label class="filter-label">Categoria</label>
-            <select id="filter-category" class="filter-select">
-                <option value="">Todas</option>
-            </select>
-        </div>
-
-        <div class="filter-group">
-            <label class="filter-label">Preço mínimo</label>
-            <input type="number" id="filter-price-min" class="filter-input" placeholder="R$ 0" min="0">
-        </div>
-
-        <div class="filter-group">
-            <label class="filter-label">Preço máximo</label>
-            <input type="number" id="filter-price-max" class="filter-input" placeholder="R$ 9999" min="0">
-        </div>
-
-        <button class="btn-apply-filter" id="btn-apply-filter">
-            <i class="fas fa-check"></i> Aplicar
+        <button id="openBtn" class="btn-primary">
+            <i class="fas fa-sliders-h"></i> Filtrar Resultados
         </button>
-        <button class="btn-clear-filter" id="btn-clear-filter">
-            <i class="fas fa-trash"></i> Limpar filtros
+
+
+    <div id="overlay" class="overlay"></div>
+
+    <div id="filterMenu" class="filter-side-menu">
+        <div class="menu-header">
+            <h2>Filtros</h2>
+            <button id="closeBtn">&times;</button>
+        </div>
+
+        <div class="menu-content">
+            <div class="filter-group">
+                <label class="filter-label">Categoria</label>
+                <select id="filter-category" class="filter-select">
+                    <option value="">Todas</option>
+                </select>
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Preço mínimo</label>
+                <input type="number" id="filter-price-min" class="filter-input" placeholder="R$ 0" min="0">
+            </div>
+
+            <div class="filter-group">
+                <label class="filter-label">Preço máximo</label>
+                <input type="number" id="filter-price-max" class="filter-input" placeholder="R$ 9999" min="0">
+            </div>
+
+            <button class="btn-apply-filter" id="btn-apply-filter">
+                <i class="fas fa-check"></i> Aplicar
+            </button>
+            <button class="btn-clear-filter" id="btn-clear-filter">
+                <i class="fas fa-trash"></i> Limpar filtros
+            </button>
+        </div>
+    </div>
+
+    <main class="display-container" id="display-container">
+        <div class="products-grid" id="products-grid">
+            <div class="loading-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <p>Carregando produtos...</p>
+            </div>
+        </div>
+        <nav class="pagination" id="pagination" aria-label="Paginação"></nav>
+    </main>
+
+    <footer class="footer-actions">
+        <button class="btn-footer" id="btn-home">
+            <i class="fas fa-home"></i>
         </button>
-    </aside>
-    <div class="filter-overlay" id="filter-overlay"></div>
+        <button class="btn-footer" id="btn-filter-mobile">
+            <i class="fas fa-sliders-h"></i>
+        </button>
+    </footer>
 
     <script src="catalog.js"></script>
-
 </body>
 
 </html>
