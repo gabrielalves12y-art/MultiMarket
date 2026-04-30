@@ -1,5 +1,5 @@
 const API_BASE = 'https://api.escuelajs.co/api/v1';
-const LIMIT = 15;
+const LIMIT = 30;
 
 const state = {
     currentPage: 1,
