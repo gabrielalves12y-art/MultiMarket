@@ -26,6 +26,52 @@ function ehEmailValido(email) {
 	return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email);
 }
 
+function validarSenha() {	
+
+	let passwordInput = document.getElementById('reg-password');
+	let confirmPasswordInput = document.getElementById('reg-confirm-password');
+	
+	if (passwordInput.value !== confirmPasswordInput.value) {
+		exibirMensagem('As senhas não coincidem. Por favor, verifique.', 'erro');
+		confirmPasswordInput.setCustomValidity('As senhas não coincidem. Por favor, verifique.');
+
+		passwordInput.style.borderColor = '#ff4d4d';
+		confirmPasswordInput.style.borderColor = '#ff4d4d';
+		return false;
+	} else {
+		passwordInput.style.borderColor = '';
+		confirmPasswordInput.style.borderColor = '';
+		return true;
+	}
+}
+
+function tamanhoSenhaValido() {
+	const passwordInput = document.getElementById('reg-password').value;
+	const confirmPasswordInput = document.getElementById('reg-confirm-password').value;
+
+	if (passwordInput.length < 6 || passwordInput.length > 8) {
+		exibirMensagem('A senha deve conter entre 6 e 8 caracteres.', 'erro');
+		passwordInput.setCustomValidity('A senha deve conter entre 6 e 8 caracteres.');
+		passwordInput.style.borderColor = '#ff4d4d';
+		return false;
+	} else {
+		passwordInput.style.borderColor = '';
+		return true;
+	}
+}
+
+
+function validarFormulario() {
+	const emailValido = validarEmailNoCampo();
+	const senhaValida = validarSenha();
+
+
+	if( !emailValido || !senhaValida) {
+		return;
+	}
+	
+}
+
 function transformarEmLista(valor) {
 	if (!valor) {
 		return [];
@@ -131,19 +177,58 @@ async function verificarDisponibilidadeEmail(email) {
 		};
 	}
 
-	const { ok, users } = await buscarUsuariosNaApi();
+	try {
+		// Endpoint oficial de disponibilidade de e-mail do projeto.
+		const response = await fetch(`${URL_BASE}/users/is-available`, {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify({ email: emailNormalizado })
+		});
 
-	if (!ok) {
+		if (!response.ok) {
+			return {
+				ok: false,
+				isAvailable: false
+			};
+		}
+
+		const data = await response.json();
+
+		if (typeof data?.isAvailable === 'boolean') {
+			if (data.isAvailable) {
+				return {
+					ok: true,
+					isAvailable: true
+				};
+			}
+
+			// Fallback para contornar respostas inconsistentes da API pública.
+			const { ok, users } = await buscarUsuariosNaApi();
+
+			if (!ok) {
+				return {
+					ok: true,
+					isAvailable: false
+				};
+			}
+
+			return {
+				ok: true,
+				isAvailable: !emailExisteEmUsuarios(users, emailNormalizado)
+			};
+		}
+
+		return {
+			ok: false,
+			isAvailable: false
+		};
+	} catch (error) {
+		console.error('Erro ao verificar disponibilidade do e-mail:', error);
 		return {
 			ok: false,
 			isAvailable: false
 		};
 	}
-
-	return {
-		ok: true,
-		isAvailable: !emailExisteEmUsuarios(users, emailNormalizado)
-	};
 }
 
 
@@ -264,6 +349,7 @@ if (emailInput){
 }
 
 
+
 const registerForm = document.getElementById('register-form');
 if(registerForm){
     
@@ -271,13 +357,17 @@ if(registerForm){
 	registerForm.addEventListener('submit', async (event) => {
 	  event.preventDefault();
 
-	  const emailValido = await validarEmailNoCampo();
-	  if (!emailValido) {
+
+	formularioValido = validarFormulario();
+	// passwordUpper = tamanhoSenhaValido();
+
+	if (!formularioValido) {
 		return;
-	  }
+	}
+
 
 	  // Dados do usuário a ser cadastrado
-	  const userData = {
+	const userData = {
 		name: document.getElementById('reg-name').value,
 		email: normalizarEmail(document.getElementById('reg-email').value),
 		password: document.getElementById('reg-password').value,
@@ -305,7 +395,7 @@ if(registerForm){
 			// Time para o usuário ler a mensagem antes de redirecionar para a página de login
 			setTimeout(() => {
 				window.location.href = '../pages/login.html';
-			}, 3000);    
+			}, 5000);    
 		}
 
 		else{

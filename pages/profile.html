@@ -1,38 +1,139 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MultiMarket - Meu Perfil</title>
-    <link rel="stylesheet" href="../src/css/main.css">
-</head>
-<body>
+  <!doctype html>
+  <html lang="pt-br">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>MultiMarket - Meu Perfil</title>
+      <link rel="stylesheet" href="../src/css/profile.css" />
+    </head>
+    <body>
+      <!--Cabeçalho -->
+      <header class="profile-header">
+        <img
+          src="../src/assets/imgs/Logo 1.png"
+          alt="MultiMarket"
+          class="profile-logo"
+        />
 
-    <header class="profile-header">
-        <div class="header-content">
-            <div class="user-info">
-                <img id="user-avatar" src="" alt="Avatar do Usuário" class="avatar-circle">
-                <h2 id="welcome-message">Carregando...</h2>
-            </div>
+        <!-- Barra de busca -->
+        <form class="profile-searchbar" role="search">
+          <input
+            type="search"
+            class="profile-search"
+            placeholder="Buscar"
+            aria-label="Buscar"
+
+          />
+
+          <!-- Botão de pesquisa -->
+          <button
+            type="submit"
+            class="profile-search-button"
+            aria-label="Pesquisar"
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path
+                d="M10 4a6 6 0 1 1 0 12 6 6 0 0 1 0-12Zm0-2a8 8 0 1 0 4.9 14.3l4.4 4.4 1.4-1.4-4.4-4.4A8 8 0 0 0 10 2Z"
+              ></path>
+            </svg>
+          </button>
+        </form>
+
+        <!-- Ícone do usuário -->
+        <button type="button" class="profile-top-icon" aria-label="Conta" onclick="Conta()">
+          <img src="../src/assets/icons/sharp-person.png" alt="" />
+        </button>
+      </header>
+
+      <!-- Conteúdo principal -->
+      <main class="profile-main">
+        <section class="profile-card" aria-labelledby="profile-title">
+
+          <!-- Avatar do usuário -->
+          <div class="profile-avatar-wrap">
+            <img
+              src="../src/assets/icons/sharp-person.png"
+              alt="Foto do usuário"
+              class="profile-avatar"
+              id="profile-avatar"
+            />
+          </div>
+
+
+          <h1 id="profile-title" class="profile-name"></h1>
+
+          <!-- Formulário de edição do perfil -->
+          <form class="profile-form" id="profile-form">
+            <label class="profile-field">
+              <span>ID</span>
+              <input type="text" id="profile-id" readonly />
+              <br>
+            </label>
+
+
+            <label class="profile-field">
+              <span>Nome</span>
+              <input type="text" id="profile-name-field" readonly />
+              <br>
+            </label>
+
+
+            <label class="profile-field profile-field--full">
+              <span>E-mail</span>
+              <input type="email" id="profile-email-field" readonly />
+              <br>
+            </label>
+
+
+            <label class="profile-field profile-field--full">
+              <span>Role</span>
+              <input type="text" id="profile-role-field" readonly />
+              <br>
+            </label>
+          </form>
+
+          <!-- Mensagem de feedback -->
+          <p id="profile-message" class="profile-message" role="status" aria-live="polite"></p>
+
+          <!-- Ações do perfil -->
+          <div class="profile-actions">
+            <button type="button" id="profile-refresh" class="profile-button profile-button--confirm">
+              Confirmar
+            </button>
+            <button type="button" id="profile-logout" class="profile-button profile-button--logout">
+              Sair
+            </button>
+          </div>
+
+
+           <!-- Rodapé com navegação  -->
+           
+          <div class="profile-section">
+            <button type="button" id="nav-shop" class="profile-home" aria-label="Início">
+              <img src="../src/assets/imgs/inicio.png" alt="Início" />
+            </button>
             
-            <button onclick="fazerLogout()" class="btn-logout">Sair</button>
-        </div>
-    </header>
+            <button type="button" id="nav-categorias" class="profile-categories" aria-label="Categorias">
+              <img src="../src/assets/imgs/categoria.png" alt="Categorias" />
+            </button>
+ 
+            <button type="button" id="nav-perfil" class="profile-perfil" aria-label="Perfil">
+              <img src="../src/assets/imgs/perfil.png" alt="Perfil" />
+            </button>
+          </div>
+           
 
-    <main class="profile-container">
-        
-
-        <section class="user-details-card">
-            <h3>Informações da Conta</h3>
-            <p>Esta é a tua área exclusiva no MultiMarket. Aqui poderás gerir as tuas compras e dados.</p>
-            
-            <div class="info-group">
-                <label>Status da Sessão:</label>
-                <span class="status-badge">Autenticado via JWT</span>
-            </div>
         </section>
-    </main>
+      </main>
 
-    <script src="../src/javascript/login.js"></script>
-</body>
-</html>
+      <!-- Rodapé -->
+      <footer class="profile-footer">
+        <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
+      </footer>
+      <script src="../src/javascript/profile.js"></script>
+      <script src="../src/javascript/app.js"></script>
+    </body>
+  </html>
+
+
+

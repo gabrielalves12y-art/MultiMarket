@@ -1,16 +1,19 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>MultiMarket</title>
     <link rel="stylesheet" href="../src/css/login.css" />
- 
   </head>
   <body>
     <main class="auth-shell auth-shell--login">
       <header class="auth-header">
-        <img src="../src/assets/imgs/Logo.png" alt="Logo MultiMarket" class="auth-logo" />
+        <img
+          src="../src/assets/imgs/Logo.png"
+          alt="Logo MultiMarket"
+          class="auth-logo"
+        />
       </header>
 
       <section class="auth-card">
@@ -26,12 +29,15 @@
             required
           />
 
-          <input
-            type="password"
-            id="log-password"
-            placeholder="Senha"
-            required
-          />
+          <div class="input-box">
+            <input type="password" id="password" placeholder="Senha" required />
+
+            <img
+              src="../src/assets/icons/eye-close.svg"
+              alt="Esconder senha"
+              id="eyeicon"
+            />
+          </div>
 
           <button type="submit">Entrar</button>
         </form>
@@ -55,11 +61,10 @@
       <div id="error-message"></div>
     </main>
 
-    <script src="../src/javascript/login.js"></script>
-    <!-- <script src="../src/javascript/app.js"></script> -->
-
     <footer>
       <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
     </footer>
+    <script src="../src/javascript/login.js"></script>
+    <!-- <script src="../src/javascript/app.js"></script> -->
   </body>
 </html>

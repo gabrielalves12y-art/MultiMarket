@@ -128,6 +128,45 @@ body::before {
   filter: brightness(0) invert(1);
 }
 
+.input-box {
+  position: relative;
+  width: 100%;
+}
+
+#eyeicon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  display: block;
+  filter: brightness(0) saturate(100%);
+ 
+}
+
+#eyeicon-confirm {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  display: block;
+  filter: brightness(0) saturate(100%);
+}
+.input-box input {
+  padding-right: 44px;
+}
+
+.input-box #confirm-password {
+  padding-right: 44px;
+}
+
 #register-form {
   width: 100%;
   height: 250px;

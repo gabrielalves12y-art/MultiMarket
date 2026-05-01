@@ -60,6 +60,27 @@ async function renovarTokens() {
 	}
 }
 
+//função para ocultar ou mostrar a senha, ainda em desenvolvimento com icones
+function mostarsenha(){
+	let password = document.getElementById('password');
+	let eyeicon = document.getElementById('eyeicon');
+
+	if (!password || !eyeicon) {
+		return;
+	}
+
+	eyeicon.onclick = function(){
+		if(password.type == 'password'){
+			password.type = 'text';
+			eyeicon.src = '../src/assets/icons/eye-open.svg';
+		} else{
+			password.type = 'password';
+			eyeicon.src = '../src/assets/icons/eye-close.svg';
+		}
+	
+	}
+}
+mostarsenha();
 
 const loginForm = document.getElementById('login-form');
 if (loginForm) {
@@ -78,7 +99,7 @@ if (loginForm) {
 
 		const loginData = {
 			email,
-			password: document.getElementById('log-password').value
+			password: document.getElementById('password').value
 		};
     
 		// Tratamento de erro

@@ -21,7 +21,7 @@ body {
 
 body {
   margin: 0;
-  min-height: 100vh;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,7 +60,7 @@ body::before {
   position: relative;
   width: 100%;
   max-width: none;
-  min-height: 100vh;
+ 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -89,9 +89,9 @@ body::before {
 }
 
 .auth-card {
-  width: min(100%, 360px);
+  width: min(100%, 350px);
   margin: auto;
-  padding: 26px 26px 22px;
+  padding: 21px 21px 12px;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -113,6 +113,34 @@ body::before {
   object-fit: contain;
 }
 
+.input-box {
+  position: relative;
+  width: 100%;
+}
+
+#eyeicon {
+  position: absolute;
+  top: 50%;
+  right: 14px;
+  width: 18px;
+  height: 18px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  transition: all 0.3s ease-in;
+  display: block;
+  filter: brightness(0) saturate(100%);
+ 
+}
+
+.input-box input {
+  padding-right: 44px;
+}
+
+.input-box #password {
+  padding-right: 44px;
+}
+
+  
 #login-form {
   width: 100%;
   display: flex;
@@ -122,7 +150,7 @@ body::before {
 
 #login-form input {
   width: 100%;
-  height: 32px;
+  height: 22px;
   border: 0;
   border-radius: 999px;
   padding: 0 16px;
@@ -145,9 +173,9 @@ body::before {
 
 #login-form button {
   margin-top: 2px;
-  height: 28px;
+  height: 20px;
   border: 0;
-  border-radius: 999px;
+  border-radius: 20px;
   background: var(--auth-accent);
   color: #132027;
   font-size: 0.82rem;
@@ -171,11 +199,11 @@ body::before {
 
 .divider p,
 .links p {
-  margin: 0;
+  margin: 0;;
   font-size: 0.84rem;
   font-weight: 600;
   color: rgba(255, 255, 255, 0.9);
-  line-height: 1.4;
+  line-height: 1.0;
   text-align: center;
 }
 
@@ -202,7 +230,7 @@ body::before {
 
 footer {
   width: 100%;
-  margin-top: 18px;
+  margin-top: -30px;
   text-align: center;
   font-size: 0.84rem;
   color: rgba(255, 255, 255, 0.8);
@@ -236,6 +264,8 @@ footer p {
   .auth-card {
     width: 340px;
   }
+
+ 
 }
 
 @media (max-width: 540px) {
