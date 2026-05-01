@@ -1,4 +1,4 @@
-// Ensure a single global `URL_BASE` to avoid redeclaration when multiple scripts load.
+
 if (typeof URL_BASE === 'undefined') {
     var URL_BASE = 'https://api.escuelajs.co/api/v1';
 }
