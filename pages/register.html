@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="../src/css/register.css" />
+ 
+  </head>
+  <body>
+    <main class="auth-shell auth-shell--register">
+      <header class="auth-header">
+        <img src="../src/assets/imgs/Logo.png" alt="Logo MultiMarket" class="auth-logo" />
+      </header>
+
+      <section class="auth-card auth-card--register">
+
+        <!-- Formulário de cadastro do usuário -->
+        <form id="register-form">
+          <!-- <label for="name">Name:</label> -->
+          <input
+            type="text"
+            id="reg-name"
+            placeholder="First name"
+            required
+          />
+
+          <!-- <label for="email">Email:</label> -->
+          <input type="email" id="reg-email" placeholder="Enter your email" required />
+
+          <div class="input-box">
+            <input type="password" id="password" placeholder="Password" minlength="6" maxlength="8" required />
+
+            <img
+              src="../src/assets/icons/eye-close.svg"
+              alt="Esconder senha"
+              id="eyeicon"
+            />
+          </div>
+
+
+          <div class="input-box">
+            <input type="password" id="confirm-password" placeholder="Confirm password" minlength="6" maxlength="8" required />
+
+            <img
+              src="../src/assets/icons/eye-close.svg"
+              alt="Esconder senha"
+              id="eyeicon-confirm"
+            />
+          </div>
+
+          <button type="submit">Cadastrar</button>
+
+          <div class="links">
+            <p>Já tem conta? <a href="../pages/login.html">Entrar</a></p>
+          </div>
+
+        </form>
+
+        <div id="error-message"></div>
+      </section>
+    </main>
+
+    
+    <footer>
+      <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
+    </footer>
+    
+    
+    <script src="../src/javascript/app.js"></script>
+   
+  </body>
+</html>

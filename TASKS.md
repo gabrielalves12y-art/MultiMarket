@@ -107,18 +107,10 @@ Produtos Relacionados
 
 ### 👤 Usuários
 
-* [ ] Cadastro de usuário
-* [ ] Verificar e-mail disponível
-
 ---
 
 ### 🔐 Autenticação
-
-* [ ] Login
-* [ ] Salvar token (localStorage)
-* [ ] GET /auth/profile
-* [ ] Logout
-
+ 
 ---
 
 ### 🧼 Qualidade
@@ -165,6 +157,17 @@ Produtos Relacionados
 * [X] Definir padrão de commits
 * [X] Criar layout base (header, main, footer)
 
+### 🔐 Autenticação
+
+* [x] Login
+* [x] Salvar token (localStorage)
+* [x] GET /auth/profile
+* [x] Logout
+
+### 👤 Usuários
+
+* [x] Cadastro de usuário
+* [x] Verificar e-mail disponível
 
 ---
 

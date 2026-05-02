@@ -210,7 +210,13 @@ feature/nome-da-feature
 
 ```bash
 /
-├── index.html
+├── pages/
+│   ├── index.html
+│   ├── catalog.html
+│   ├── cart.html
+│   ├── auth.html
+│   └── ...
+│
 ├── src/
 │   ├── css/
 │   │   ├── main.css

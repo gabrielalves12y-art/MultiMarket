@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MultiMarket</title>
+    <link rel="stylesheet" href="../src/css/login.css" />
+  </head>
+  <body>
+    <main class="auth-shell auth-shell--login">
+      <header class="auth-header">
+        <img
+          src="../src/assets/imgs/Logo.png"
+          alt="Logo MultiMarket"
+          class="auth-logo"
+        />
+      </header>
+
+      <section class="auth-card">
+        <div class="icon" aria-hidden="true">
+          <img src="../src/assets/icons/sharp-person.png" alt="" />
+        </div>
+
+        <form id="login-form">
+          <input
+            type="email"
+            id="log-email"
+            placeholder="Informe seu email"
+            required
+          />
+
+          <div class="input-box">
+            <input type="password" id="password" placeholder="Senha" required />
+
+            <img
+              src="../src/assets/icons/eye-close.svg"
+              alt="Esconder senha"
+              id="eyeicon"
+            />
+          </div>
+
+          <button type="submit">Entrar</button>
+        </form>
+
+        <div class="links">
+          <p>Não possui conta? <a href="register.html">Cadastrar-se</a></p>
+        </div>
+
+        <div class="divider">
+          <p>Ou</p>
+        </div>
+
+        <div class="links">
+          <p>
+            Esqueceu a senha?
+            <a href="../pages/update-user.html">Recuperar senha</a>
+          </p>
+        </div>
+      </section>
+
+      <div id="error-message"></div>
+    </main>
+
+    <footer>
+      <p>&copy; 2026 MultiMarket. Todos os direitos reservados.</p>
+    </footer>
+    <script src="../src/javascript/login.js"></script>
+    <!-- <script src="../src/javascript/app.js"></script> -->
+  </body>
+</html>
