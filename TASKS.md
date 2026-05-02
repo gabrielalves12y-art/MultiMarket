@@ -73,18 +73,10 @@ Produtos Relacionados
 
 ### 👤 Usuários
 
-* [ ] Cadastro de usuário
-* [ ] Verificar e-mail disponível
-
 ---
 
 ### 🔐 Autenticação
-
-* [ ] Login
-* [ ] Salvar token (localStorage)
-* [ ] GET /auth/profile
-* [ ] Logout
-
+ 
 ---
 
 ### 🧼 Qualidade
